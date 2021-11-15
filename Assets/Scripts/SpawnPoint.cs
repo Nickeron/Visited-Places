@@ -1,7 +1,12 @@
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class SpawnPoint : MonoBehaviour
 {
+    // An index used for the spawner to request the same type of decorative every time.
+    public ObjectPool<GameObject> decorativesPool;
+    private GameObject _decorative;
+
     private void OnTriggerEnter(Collider other)
     {
         //Debug.Log("Trigger");
@@ -18,11 +23,15 @@ public class SpawnPoint : MonoBehaviour
 
     void RequestDecorativeObject()
     {
-        Debug.Log($"Requesting a decorative object from {transform.position}");
+        _decorative = decorativesPool.Get();
+        _decorative.transform.position = transform.position;
     }
 
     void ReleaseDecorativeObject()
-    {
-        Debug.Log($"Requesting a release from {transform.position}");
+    {        
+        if(_decorative != null)
+        {
+            decorativesPool.Release(_decorative);
+        }        
     }
 }

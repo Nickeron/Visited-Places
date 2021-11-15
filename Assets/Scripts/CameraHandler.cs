@@ -29,7 +29,7 @@ public class CameraHandler : MonoBehaviour
         CreateColliderMeshAt(lefftMostCollider);
     }
 
-    void Update()
+    void FixedUpdate()
     {
         RotateCamera();
     }

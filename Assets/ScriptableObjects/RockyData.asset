@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   noiseScale: 10
   octaves: 3
-  persistance: 0.5
+  persistance: 0.7
   lacunarity: 3
   seed: 5
   worldColor:
