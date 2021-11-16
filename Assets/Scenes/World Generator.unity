@@ -364,6 +364,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2673887379879299778, guid: 217ba53cc5bb3694b89852a23f89c12e, type: 3}
+      propertyPath: population
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2673887379879299778, guid: 217ba53cc5bb3694b89852a23f89c12e, type: 3}
+      propertyPath: spawnParent
+      value: 
+      objectReference: {fileID: 2673887380580103911}
+    - target: {fileID: 2673887379879299778, guid: 217ba53cc5bb3694b89852a23f89c12e, type: 3}
       propertyPath: prefabs.Array.size
       value: 5
       objectReference: {fileID: 0}
@@ -374,7 +382,7 @@ PrefabInstance:
     - target: {fileID: 2673887379879299778, guid: 217ba53cc5bb3694b89852a23f89c12e, type: 3}
       propertyPath: prefabs.Array.data[0]
       value: 
-      objectReference: {fileID: 143020, guid: aee731a00031fcc4d9d2b075e528e050, type: 3}
+      objectReference: {fileID: 100000, guid: e97b73ea7fcdfb04c80f95c233816f99, type: 3}
     - target: {fileID: 2673887379879299778, guid: 217ba53cc5bb3694b89852a23f89c12e, type: 3}
       propertyPath: prefabs.Array.data[1]
       value: 
@@ -445,15 +453,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6111185873152301711, guid: 217ba53cc5bb3694b89852a23f89c12e, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 0.08715588
       objectReference: {fileID: 0}
     - target: {fileID: 6111185873152301711, guid: 217ba53cc5bb3694b89852a23f89c12e, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -1
+      value: -0.9961947
       objectReference: {fileID: 0}
     - target: {fileID: 6111185873152301711, guid: 217ba53cc5bb3694b89852a23f89c12e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -180
+      value: -170
       objectReference: {fileID: 0}
     - target: {fileID: 6863279182529731935, guid: 217ba53cc5bb3694b89852a23f89c12e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -469,3 +477,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 217ba53cc5bb3694b89852a23f89c12e, type: 3}
+--- !u!4 &2673887380580103911 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5499000568432784462, guid: 217ba53cc5bb3694b89852a23f89c12e, type: 3}
+  m_PrefabInstance: {fileID: 2673887380580103910}
+  m_PrefabAsset: {fileID: 0}

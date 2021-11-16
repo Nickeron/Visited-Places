@@ -17,6 +17,9 @@ public class ObjectsGenerator : MonoBehaviour
     [Tooltip("The prefab that will ask for a decorative GameObject when in camera's view")]
     public GameObject spawner;
 
+    [Tooltip("A transform to act as a parent for all spawned objects of this world")]
+    public Transform spawnParent;
+
     [Tooltip("All the types of decorative objects, this world will use")]
     public GameObject[] prefabs;
 
@@ -38,7 +41,7 @@ public class ObjectsGenerator : MonoBehaviour
             int index = poolIndex;
             _pools[poolIndex] = new ObjectPool<GameObject>(() =>
             {                
-                return Instantiate(prefabs[index]);
+                return Instantiate(prefabs[index], spawnParent);
             }, OnGetDecorative, OnReleaseDecorative);
         }
     }
@@ -62,7 +65,7 @@ public class ObjectsGenerator : MonoBehaviour
         foreach (Vector3 position in _spawnablePositions)
         {
             // Instantiate every spawner with a random pool of objects to pull from, so we have variety
-            Instantiate(spawner, position, Quaternion.identity)
+            Instantiate(spawner, position, Quaternion.identity, spawnParent)
                 .GetComponent<SpawnPoint>()
                 .decorativesPool = GetRandomPool();
         }
@@ -83,6 +86,7 @@ public class ObjectsGenerator : MonoBehaviour
         return group.OrderBy(arg => System.Guid.NewGuid()).Take(elementsCount);
     }
 
+    #region Spawn Safety
     IEnumerable<Vector3> GetSpawnablePositions(IEnumerable<Vector3> positions)
     {
         return positions.Where(position => IsPositionSafeToSpawn(position));
@@ -99,6 +103,7 @@ public class ObjectsGenerator : MonoBehaviour
         float lowerBound = center - unspawnableAreaSize;
         return number < upperBound && number > lowerBound;
     }
+    #endregion Spawn Safety
 }
 
 public enum Population
