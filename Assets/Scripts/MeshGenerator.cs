@@ -130,7 +130,7 @@ public class MeshGenerator : MonoBehaviour
 
     private float GetNoiseSample(int x, int z)
     {
-        System.Random prng = new System.Random(MeshData.seed);
+        System.Random prng = new(MeshData.seed);
 
         float amplitude = 1;
         float frequency = 1;

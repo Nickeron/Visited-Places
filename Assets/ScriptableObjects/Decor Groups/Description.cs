@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 public static class Description
 {
@@ -35,10 +37,63 @@ public static class Description
         "I didn't have a bad time there. That's for sure. So why not plan a trip back soon?"
     };
 
+    // Random Generator
+    private static Random rndg;
+
     private static Dictionary<Population, string[]> crowdAdjectives = new()
     {
         { Population.Crowded, new string[] { "packed", "full", "brimming", "crammed", "crowded", "overflowing" } },
         { Population.Normal, new string[] { "normal", "average", "everyday", "like many others", "not too much, not too little", "your standard place" } },
         { Population.Empty, new string[] { "empty", "like a desert", "vacant", "bare", "desolate", "uninhabited" } },
     };
+
+    public static string GetWorldDescription(int seed, DecorPiece[] decors, Population density)
+    {        
+        rndg = new(seed);
+
+        return GetRandomStarter(density) + GetRandomMiddler(decors) + enders[rndg.Next(enders.Length)];
+    }
+
+    private static string GetRandomStarter(Population density)
+    {
+        var denseAdjectives = crowdAdjectives[density];
+        string starter = starters[rndg.Next(starters.Length)];
+        return ReplaceLastWith(starter, "&", denseAdjectives[rndg.Next(denseAdjectives.Length)]);
+    }
+
+    private static string GetRandomMiddler(DecorPiece[] decors)
+    {
+        string middler = middlers[rndg.Next(middlers.Length)];
+        return ReplaceLastWith(middler, "&", GetDecorDescription(decors.Select(dec => dec.type).ToHashSet()));
+    }
+
+    private static string GetDecorDescription(HashSet<DecorativeType> decorTypesUsed)
+    {
+        switch (decorTypesUsed.Count)
+        {
+            case 0: return "absolutely nothing";
+            case 1: return "just " + decorTypesUsed.First();
+            default:
+                string items = "";
+
+                foreach (var type in decorTypesUsed)
+                {
+                    items += type.ToString() + ", ";
+                }
+
+                return ReplaceLastWith(RemoveLastOf(items));
+        }
+    }
+
+    private static string ReplaceLastWith(string sentence, string separator = ", ", string replace = "and ")
+    {
+        int pos = sentence.LastIndexOf(separator);
+        return RemoveLastOf(sentence, separator).Insert(pos, replace);
+    }
+
+    private static string RemoveLastOf(string sentence, string separator = ", ")
+    {
+        int pos = sentence.LastIndexOf(separator);
+        return sentence.Remove(pos, separator.Length);
+    }
 }

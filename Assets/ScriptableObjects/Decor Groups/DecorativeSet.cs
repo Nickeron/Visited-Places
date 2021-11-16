@@ -54,12 +54,12 @@ public struct DecorPiece
 
 public enum DecorativeType
 {
-    Tree,
-    Rock,
-    Bush,
-    Flower,
-    Mushroom,
-    Grass,
-    Plant,
-    DeadNature
+    trees,
+    rocks,
+    bushes,
+    flowers,
+    mushrooms,
+    grass,
+    plants,
+    logs
 }
