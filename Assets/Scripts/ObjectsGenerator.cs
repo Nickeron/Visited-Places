@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,12 +6,15 @@ using UnityEngine.Pool;
 
 public class ObjectsGenerator : MonoBehaviour
 {
+    [Tooltip("How crowded do we want the planet to be?")]
+    public Population population = Population.Normal;
+
+    [Tooltip("All the types of decorative objects, this world will use")]
+    public GameObject[] prefabs;
+
     [Tooltip("Size of the area where, the generator won't be able to spawn objects, to avoid blocking the camera's view")]
     [Range(0, 3)]
     public int unspawnableAreaSize = 0;
-
-    [Tooltip("How crowded do we want the planet to be?")]
-    public Population population = Population.Normal;
 
     [Tooltip("The prefab that will ask for a decorative GameObject when in camera's view")]
     public GameObject spawner;
@@ -20,16 +22,10 @@ public class ObjectsGenerator : MonoBehaviour
     [Tooltip("A transform to act as a parent for all spawned objects of this world")]
     public Transform spawnParent;
 
-    [Tooltip("All the types of decorative objects, this world will use")]
-    public GameObject[] prefabs;
-
     ObjectPool<GameObject>[] _pools;
     Vector3[] _spawnablePositions;
 
-    private void Awake()
-    {
-        InitializePools();
-    }
+    System.Random _rndg;
 
     void InitializePools()
     {
@@ -40,7 +36,7 @@ public class ObjectsGenerator : MonoBehaviour
         {
             int index = poolIndex;
             _pools[poolIndex] = new ObjectPool<GameObject>(() =>
-            {                
+            {
                 return Instantiate(prefabs[index], spawnParent);
             }, OnGetDecorative, OnReleaseDecorative);
         }
@@ -51,16 +47,19 @@ public class ObjectsGenerator : MonoBehaviour
         decorative.SetActive(true);
         Debug.Log("Sending Decorative from pool");
     }
-    
+
     private void OnReleaseDecorative(GameObject decorative)
     {
         decorative.SetActive(false);
         Debug.Log("Releasing Decorative in pool");
     }
 
-    internal void PopulateWithSpawners(Vector3[] vertices)
+    internal void PopulateWithSpawners(Vector3[] vertices, int seed)
     {
-        _spawnablePositions = GetRandomElements(GetSpawnablePositions(vertices), (int) population).ToArray();
+        InitializePools();
+
+        _rndg = new System.Random(seed);
+        _spawnablePositions = GetRandomElements(GetSpawnablePositions(vertices), (int)population).ToArray();
 
         foreach (Vector3 position in _spawnablePositions)
         {
@@ -78,7 +77,7 @@ public class ObjectsGenerator : MonoBehaviour
 
     public ObjectPool<GameObject> GetRandomPool()
     {
-        return _pools[UnityEngine.Random.Range(0, _pools.Count())];
+        return _pools[_rndg.Next(_pools.Count())];
     }
 
     public IEnumerable<T> GetRandomElements<T>(IEnumerable<T> group, int elementsCount)
@@ -93,7 +92,7 @@ public class ObjectsGenerator : MonoBehaviour
     }
 
     bool IsPositionSafeToSpawn(Vector3 pos)
-    {        
+    {
         return !(IsInBounds(pos.x) && IsInBounds(pos.z));
     }
 

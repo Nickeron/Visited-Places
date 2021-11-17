@@ -3,7 +3,6 @@ using UnityEngine.Pool;
 
 public class SpawnPoint : MonoBehaviour
 {
-    // An index used for the spawner to request the same type of decorative every time.
     public ObjectPool<GameObject> decorativesPool;
     private GameObject _decorative;
 

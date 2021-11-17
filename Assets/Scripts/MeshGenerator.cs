@@ -3,8 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(MeshFilter), typeof(ObjectsGenerator))]
 public class MeshGenerator : MonoBehaviour
 {
-    [Header("World Type")]
-    public MeshDataSO MeshData;  
+    MeshDataSO _meshData;  
 
     Mesh _generatedMesh;
 
@@ -17,11 +16,20 @@ public class MeshGenerator : MonoBehaviour
 
     public bool autoUpdate;
 
-    void Start()
+    private System.Random _rndg;
+
+    public void InitializeWorld(int seed, MeshDataSO meshParameters)
     {
+        _meshData = meshParameters;
+
+        // Initialize Random Generator with a specific seed value.
+        // So we can control what is generated through one variable.
+        _rndg = new System.Random(seed);        
+
+        // Create the world
         CreateShape();
         UpdateMesh();
-        GetComponent<ObjectsGenerator>().PopulateWithSpawners(_vertices);
+        GetComponent<ObjectsGenerator>().PopulateWithSpawners(_vertices, seed);
     }
 
     public void CreateShape()
@@ -45,11 +53,6 @@ public class MeshGenerator : MonoBehaviour
 
         // Ask Unity to set the normals properly, so that our mesh is lit right
         _generatedMesh.RecalculateNormals();
-    }
-
-    public Vector3 GetRandomVertex()
-    {
-        return _vertices[Random.Range(0, _vertices.Length)];
     }
 
     #region Creation Methods
@@ -92,7 +95,7 @@ public class MeshGenerator : MonoBehaviour
 
         ForEachVertex((x, z, index) =>
         {
-            _colors[index] = MeshData.worldColor.Evaluate(GetNormalHeight(index));
+            _colors[index] = _meshData.worldColor.Evaluate(GetNormalHeight(index));
         });
     }
     #endregion Creation Methods
@@ -130,22 +133,20 @@ public class MeshGenerator : MonoBehaviour
 
     private float GetNoiseSample(int x, int z)
     {
-        System.Random prng = new(MeshData.seed);
-
         float amplitude = 1;
         float frequency = 1;
         float noiseHeight = 0;
 
-        for (int i = 0; i < MeshData.octaves; i++)
+        for (int i = 0; i < _meshData.octaves; i++)
         {
-            float sampleX = x / MeshData.noiseScale * frequency + prng.Next(-100000, 100000);
-            float sampleY = z / MeshData.noiseScale * frequency + prng.Next(-100000, 100000);
+            float sampleX = x / _meshData.noiseScale * frequency + _rndg.Next(-100000, 100000);
+            float sampleY = z / _meshData.noiseScale * frequency + _rndg.Next(-100000, 100000);
 
             float perlinValue = Mathf.PerlinNoise(sampleX, sampleY) * 2 - 1;
             noiseHeight += perlinValue * amplitude;
 
-            amplitude *= MeshData.persistance;
-            frequency *= MeshData.lacunarity;
+            amplitude *= _meshData.persistance;
+            frequency *= _meshData.lacunarity;
         }
         return noiseHeight;
     }

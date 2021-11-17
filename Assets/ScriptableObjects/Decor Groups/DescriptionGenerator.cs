@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 
-public static class Description
+public static class DescriptionGenerator
 {
-    private static string[] starters =
+    private static string[] _starters =
         {
         "That place was $.",
         "When I visited there it was $.",
@@ -15,7 +15,7 @@ public static class Description
         "Hmm, $. That's what this place was."
     };
 
-    private static string[] middlers =
+    private static string[] _middlers =
         {
         "You could find $ there",
         "I could see $ around me",
@@ -26,7 +26,7 @@ public static class Description
         "One can find $"
     };
 
-    private static string[] enders =
+    private static string[] _enders =
         {
         "I may get there again one day. Who knows?",
         "Maybe things are different there now. I could come back and see for myself.",
@@ -37,33 +37,28 @@ public static class Description
         "I didn't have a bad time there. That's for sure. So why not plan a trip back soon?"
     };
 
-    // Random Generator
-    private static Random rndg;
-
-    private static Dictionary<Population, string[]> crowdAdjectives = new()
+    private static Dictionary<Population, string[]> _crowdAdjectives = new()
     {
         { Population.Crowded, new string[] { "packed", "full", "brimming", "crammed", "crowded", "overflowing" } },
         { Population.Normal, new string[] { "normal", "average", "everyday", "like many others", "not too much, not too little", "your standard place" } },
         { Population.Empty, new string[] { "empty", "like a desert", "vacant", "bare", "desolate", "uninhabited" } },
     };
 
-    public static string GetWorldDescription(int seed, DecorPiece[] decors, Population density)
+    public static string GetWorldDescription(Random rndg, DecorPiece[] decors, Population density)
     {        
-        rndg = new(seed);
-
-        return GetRandomStarter(density) + GetRandomMiddler(decors) + enders[rndg.Next(enders.Length)];
+        return GetRandomStarter(density, rndg) + GetRandomMiddler(decors, rndg) + _enders[rndg.Next(_enders.Length)];
     }
 
-    private static string GetRandomStarter(Population density)
+    private static string GetRandomStarter(Population density, Random rndg)
     {
-        var denseAdjectives = crowdAdjectives[density];
-        string starter = starters[rndg.Next(starters.Length)];
+        var denseAdjectives = _crowdAdjectives[density];
+        string starter = _starters[rndg.Next(_starters.Length)];
         return ReplaceLastWith(starter, "&", denseAdjectives[rndg.Next(denseAdjectives.Length)]);
     }
 
-    private static string GetRandomMiddler(DecorPiece[] decors)
+    private static string GetRandomMiddler(DecorPiece[] decors, Random rndg)
     {
-        string middler = middlers[rndg.Next(middlers.Length)];
+        string middler = _middlers[rndg.Next(_middlers.Length)];
         return ReplaceLastWith(middler, "&", GetDecorDescription(decors.Select(dec => dec.type).ToHashSet()));
     }
 

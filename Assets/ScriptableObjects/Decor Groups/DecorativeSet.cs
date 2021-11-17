@@ -9,32 +9,25 @@ public class DecorativeSet : ScriptableObject
     public Gradient worldColor;
     public List<DecorativeGroup> decoratives;
 
-
-
-    private DecorPiece[] GetRandomDecors(int variety)
+    private DecorPiece[] GetRandomDecors(int variety, System.Random rndg)
     {
         DecorPiece[] newDecorSet = new DecorPiece[variety];
 
         for (int i = 0; i < variety; i++)
         {
-            newDecorSet[i] = GetRandomDecorPiece();
+            newDecorSet[i] = GetRandomDecorPiece(rndg);
         }
         return newDecorSet;
     }
 
-    private string GetDescription(DecorativeGroup[] decorSet)
+    private DecorPiece GetRandomDecorPiece(System.Random rndg)
     {
-        return "";
-    }
-
-    private DecorPiece GetRandomDecorPiece()
-    {
-        DecorativeGroup randomGroup = decoratives[Random.Range(0, decoratives.Count)];
+        DecorativeGroup randomGroup = decoratives[rndg.Next(decoratives.Count)];
 
         return new DecorPiece
         {
             type = randomGroup.type,
-            prefab = randomGroup.objects[Random.Range(0, randomGroup.objects.Length)]
+            prefab = randomGroup.objects[rndg.Next(randomGroup.objects.Length)]
         };
     }
 }
