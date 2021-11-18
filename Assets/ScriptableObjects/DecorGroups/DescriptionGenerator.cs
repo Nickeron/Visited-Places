@@ -37,6 +37,21 @@ public static class DescriptionGenerator
         "I didn't have a bad time there. That's for sure. So why not plan a trip back soon?"
     };
 
+    private static string[] _namePrefix =
+    {
+        "En", "Ned", "Ic", "Hil", "Den", "Bor", "Sil", "It", "Am", "Eind", "Ut", "Cre", "Sw", "U", "Ru"
+    };
+
+    private static string[] _nameMidFix =
+    {
+        "g", "er", "e", "ver", "ti", "al", "ster", "hov", "ni", "zo", "te", "ed", "kr", "ma"
+    };
+
+    private static string[] _nameSuffix =
+    {
+        "land", "ce", "mark", "sum", "berg", "ia", "dam", "en", "recht", "ain", "sia", "nia"
+    };
+
     private static Dictionary<Population, string[]> _crowdAdjectives = new()
     {
         { Population.Crowded, new string[] { "packed", "full", "brimming", "crammed", "crowded", "overflowing" } },
@@ -44,22 +59,30 @@ public static class DescriptionGenerator
         { Population.Empty, new string[] { "empty", "like a desert", "vacant", "bare", "desolate", "uninhabited" } },
     };
 
-    public static string GetWorldDescription(Random rndg, DecorPiece[] decors, Population density)
-    {        
-        return GetRandomStarter(density, rndg) + GetRandomMiddler(decors, rndg) + _enders[rndg.Next(_enders.Length)];
+    public static Description GetWorldDescription(Random rndg, DecorPiece[] decors, Population density)
+    {
+        return new Description
+        {
+            Title = GetRandomTitle(rndg),
+            Body = GetRandomStarter(density, rndg) + GetRandomMiddler(decors, rndg) + GetRandom(_enders, rndg)
+        };
+    }
+
+    private static string GetRandomTitle(Random rndg)
+    {
+        return GetRandom(_namePrefix, rndg) + GetRandom(_nameMidFix, rndg) + GetRandom(_nameSuffix, rndg);
     }
 
     private static string GetRandomStarter(Population density, Random rndg)
     {
         var denseAdjectives = _crowdAdjectives[density];
-        string starter = _starters[rndg.Next(_starters.Length)];
-        return ReplaceLastWith(starter, "&", denseAdjectives[rndg.Next(denseAdjectives.Length)]);
+
+        return ReplaceLastWith(GetRandom(_starters, rndg), "&", GetRandom(denseAdjectives, rndg));
     }
 
     private static string GetRandomMiddler(DecorPiece[] decors, Random rndg)
     {
-        string middler = _middlers[rndg.Next(_middlers.Length)];
-        return ReplaceLastWith(middler, "&", GetDecorDescription(decors.Select(dec => dec.type).ToHashSet()));
+        return ReplaceLastWith(GetRandom(_middlers, rndg), "&", GetDecorDescription(decors.Select(dec => dec.type).ToHashSet()));
     }
 
     private static string GetDecorDescription(HashSet<DecorativeType> decorTypesUsed)
@@ -78,6 +101,11 @@ public static class DescriptionGenerator
 
                 return ReplaceLastWith(RemoveLastOf(items));
         }
+    }
+
+    static string GetRandom(string[] strings, Random randomGenerator)
+    {
+        return strings[randomGenerator.Next(strings.Length)];
     }
 
     private static string ReplaceLastWith(string sentence, string separator = ", ", string replace = "and ")

@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Camera), typeof(Skybox))]
 public class CameraHandler : MonoBehaviour
 {
     [Range(5f, 10f)]
@@ -31,12 +32,18 @@ public class CameraHandler : MonoBehaviour
 
     void FixedUpdate()
     {
-        RotateCamera();
+        RotateGameObject();
     }
 
+    /// <summary>
+    /// Creates a simple mesh, of 1 triangle, to be used as a collision mesh from the given MeshFilter.   
+    /// </summary>
+    /// <param name="childMeshCollider">The MeshFilter component to fill with the new Mesh</param>
+    /// TODO: Remove MeshRenderer from children, and leave only the collider to increase performance
     void CreateColliderMeshAt(MeshFilter childMeshCollider)
     {
-        Mesh boundaryMesh = new Mesh();
+        Mesh boundaryMesh = new();
+
         childMeshCollider.sharedMesh = boundaryMesh;
         childMeshCollider.GetComponent<MeshCollider>().sharedMesh = boundaryMesh;
 
@@ -54,6 +61,11 @@ public class CameraHandler : MonoBehaviour
         boundaryMesh.uv = new Vector2[vertices.Length];
     }
 
+    /// <summary>
+    /// Calculates a vector with cosine (as x) and sine (as y) (z = 0) for the given angle  
+    /// </summary>
+    /// <param name="angle">The angle in Degrees converted to RAD by the method</param>
+    /// <returns>new Vector3(x: cosine(angle), y: sine(angle), z: 0)</returns>
     private Vector3 GetVectorFromAngleOnY(float angle)
     {
         // Angle = 0 -> 360
@@ -61,8 +73,33 @@ public class CameraHandler : MonoBehaviour
         return new Vector3(Mathf.Cos(angleRad), Mathf.Sin(angleRad));
     }
 
-    void RotateCamera()
+    /// <summary>
+    /// Rotates the gameobject it resides, clockwise.
+    /// </summary>
+    void RotateGameObject()
     {
         transform.Rotate(new Vector3(0, rotationSpeed * Time.deltaTime, 0));
+    }
+
+    /// <summary>
+    /// Sets the output texture for the camera component.
+    /// </summary>
+    /// <param name="cardRawImage">The RenderTexture element to output the feed of the camera to.</param>
+    public void SetRenderTexture(RenderTexture cardRawImage)
+    {
+        if (cardRawImage == null) return;
+
+        GetComponent<Camera>().targetTexture = cardRawImage;
+    }
+
+    /// <summary>
+    /// Sets the skybox component to be used as a background from the camera component.
+    /// </summary>
+    /// <param name="customSkybox">The material to be used as a skybox by the camera.</param>
+    public void SetCameraSky(Material customSkybox)
+    {
+        if (customSkybox == null) return;
+
+        GetComponent<Skybox>().material = customSkybox;
     }
 }

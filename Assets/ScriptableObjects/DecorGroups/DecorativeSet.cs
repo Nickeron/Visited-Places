@@ -9,11 +9,11 @@ public class DecorativeSet : ScriptableObject
     public Gradient worldColor;
     public List<DecorativeGroup> decoratives;
 
-    private DecorPiece[] GetRandomDecors(int variety, System.Random rndg)
+    public DecorPiece[] GetRandomDecors(int arraySize, System.Random rndg)
     {
-        DecorPiece[] newDecorSet = new DecorPiece[variety];
+        DecorPiece[] newDecorSet = new DecorPiece[arraySize];
 
-        for (int i = 0; i < variety; i++)
+        for (int i = 0; i < arraySize; i++)
         {
             newDecorSet[i] = GetRandomDecorPiece(rndg);
         }

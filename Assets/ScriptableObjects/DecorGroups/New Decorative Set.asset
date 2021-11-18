@@ -44,6 +44,12 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   decoratives:
   - type: 0
-    objects: []
+    objects:
+    - {fileID: 143020, guid: aee731a00031fcc4d9d2b075e528e050, type: 3}
+    - {fileID: 160606, guid: 5c3cbac9d5eae3844a928d36e6dbd1a6, type: 3}
+    - {fileID: 142018, guid: d537224908c5f444f86c9e57e0c7234c, type: 3}
+    - {fileID: 100000, guid: d2821924b86cff5439f12b0289585dbf, type: 3}
+    - {fileID: 100000, guid: d2821924b86cff5439f12b0289585dbf, type: 3}
+    - {fileID: 100000, guid: d2821924b86cff5439f12b0289585dbf, type: 3}
   - type: 0
     objects: []

@@ -1,6 +1,8 @@
+using System.Collections;
+
 using UnityEngine;
 
-[RequireComponent(typeof(MeshFilter), typeof(ObjectsGenerator))]
+[RequireComponent(typeof(MeshFilter), typeof(PropsGenerator))]
 public class MeshGenerator : MonoBehaviour
 {
     MeshDataSO _meshData;  
@@ -14,32 +16,32 @@ public class MeshGenerator : MonoBehaviour
     float minTerrainHeight, maxTerrainHeight;
     int xSize = 20, zSize = 20;
 
-    public bool autoUpdate;
-
     private System.Random _rndg;
 
-    public void InitializeWorld(int seed, MeshDataSO meshParameters)
+    public void ConstructMesh(int seed, MeshDataSO meshParameters, System.Action<Vector3[]> onMeshConstructed)
     {
+        StopAllCoroutines();
+
         _meshData = meshParameters;
 
         // Initialize Random Generator with a specific seed value.
         // So we can control what is generated through one variable.
-        _rndg = new System.Random(seed);        
+        _rndg = new System.Random(seed);
 
         // Create the world
-        CreateShape();
-        UpdateMesh();
-        GetComponent<ObjectsGenerator>().PopulateWithSpawners(_vertices, seed);
+        StartCoroutine(CreateShape(onMeshConstructed));
     }
 
-    public void CreateShape()
+    IEnumerator CreateShape(System.Action<Vector3[]> onFinish)
     {
         CreateVertices();
         CreateTriangles();
         CreateColors();
+
+        yield return UpdateMesh(onFinish);
     }
 
-    public void UpdateMesh()
+    IEnumerator UpdateMesh(System.Action<Vector3[]> onFinish)
     {
         _generatedMesh = new Mesh();
         GetComponent<MeshFilter>().mesh = _generatedMesh;
@@ -53,6 +55,9 @@ public class MeshGenerator : MonoBehaviour
 
         // Ask Unity to set the normals properly, so that our mesh is lit right
         _generatedMesh.RecalculateNormals();
+
+        onFinish?.Invoke(_vertices);
+        yield return null;
     }
 
     #region Creation Methods

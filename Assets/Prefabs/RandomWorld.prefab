@@ -81,7 +81,7 @@ Camera:
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
-  m_FOVAxisMode: 0
+  m_FOVAxisMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
   m_FocalLength: 50
@@ -93,7 +93,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 40
+  field of view: 26.215887
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -182,10 +182,11 @@ GameObject:
   - component: {fileID: 2673887379879299782}
   - component: {fileID: 2673887379879299783}
   - component: {fileID: 2673887379879299780}
+  - component: {fileID: 7337504171082846190}
   - component: {fileID: 2673887379879299781}
   - component: {fileID: 2673887379879299778}
   m_Layer: 0
-  m_Name: World Generator
+  m_Name: RandomWorld
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -258,6 +259,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &7337504171082846190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2673887379879299833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1493bd9467f826a48a034c2a098f5212, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraHandler: {fileID: 2673887379769543866}
 --- !u!114 &2673887379879299781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -270,8 +284,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 152eeabc14564e64390d99ad9ea7bddf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MeshData: {fileID: 11400000, guid: 724baba89e25d544a8ac08e94a69ba21, type: 2}
-  autoUpdate: 1
 --- !u!114 &2673887379879299778
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -284,16 +296,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bf674ee6b7fdb04ba4d16189f82a151, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unspawnableAreaSize: 2
-  population: 50
-  spawner: {fileID: 588148790822019422, guid: 2f5b3716c1efd2d4f9346fab4b58530a, type: 3}
+  spawnPointPrefab: {fileID: 588148790822019422, guid: 2f5b3716c1efd2d4f9346fab4b58530a, type: 3}
   spawnParent: {fileID: 5499000568432784462}
-  prefabs:
-  - {fileID: 100000, guid: e97b73ea7fcdfb04c80f95c233816f99, type: 3}
-  - {fileID: 160606, guid: 5c3cbac9d5eae3844a928d36e6dbd1a6, type: 3}
-  - {fileID: 138344, guid: 8a7cf5ac7b4145441a3dca86f869b09e, type: 3}
-  - {fileID: 142018, guid: d537224908c5f444f86c9e57e0c7234c, type: 3}
-  - {fileID: 117604, guid: 9469bb1d3aa88ca40aa4079e96a27f8e, type: 3}
 --- !u!1 &6941569094714572544
 GameObject:
   m_ObjectHideFlags: 0
