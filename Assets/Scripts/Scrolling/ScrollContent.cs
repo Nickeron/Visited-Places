@@ -111,6 +111,7 @@ public class ScrollContent : MonoBehaviour
             Vector2 childPos = rtChildren[i].localPosition;
             childPos.y = originY + posOffset + i * (childHeight + itemSpacing);
             rtChildren[i].localPosition = childPos;
+            rtChildren[i].GetComponent<WorldRenderer>().OnListRecycle();
         }
     }
 }

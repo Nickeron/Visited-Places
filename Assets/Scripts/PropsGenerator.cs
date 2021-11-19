@@ -25,18 +25,39 @@ public class PropsGenerator : MonoBehaviour
     private Transform spawnParent = null;
 
     ObjectPool<GameObject>[] _pools;
-    Vector3[] _spawnablePositions;
+    SpawnPoint[] _spawnPoints;
 
-    System.Random _rndg;    
+    System.Random _rndg;
 
-    internal void PopulateMeshWithProps(int seed, Vector3[] vertices, GameObject[] decorPrefabs, Population density)
+    public System.Action ResetSpawnPoints;
+
+    private void CreateSpawnPoints()
     {
-        StopAllCoroutines();        
+        _spawnPoints = new SpawnPoint[(int)Population.Crowded];
+        for (int i = 0; i < (int)Population.Crowded; i++)
+        {
+            // Instantiate every spawner with a random pool of objects to pull from, so we have variety
+            _spawnPoints[i] = Instantiate(spawnPointPrefab, spawnParent, false).GetComponent<SpawnPoint>();
+            ResetSpawnPoints += _spawnPoints[i].ResetProperties;
+        }
+    }
+
+    internal void PopulateMeshWithProps(int seed, Vector3[] vertices, GameObject[] decorPrefabs, Plane[] frustumPlanes, Population density)
+    {
+        StopAllCoroutines();
+
+        // First off, instantiate the maximum number of spawners we will need
+        if (_spawnPoints == null) CreateSpawnPoints();
+        
+        ResetSpawnPoints?.Invoke();
 
         _rndg = new System.Random(seed);
-        _spawnablePositions = GetRandomElements(GetSpawnablePositions(vertices), (int) density).ToArray();
 
-        StartCoroutine(InitializePoolsRoutine(decorPrefabs));
+        if (_pools != null) ClearPools();
+
+        var randomElements = GetRandomElements(GetSpawnablePositions(vertices), (int)density).ToArray();
+
+        StartCoroutine(InitializePoolsRoutine(decorPrefabs, randomElements, frustumPlanes));
 
         // TODO: Create a job to run in parallel through Unity's Multithreaded System
         //var spawnJob = new SpawnerCreationJob();
@@ -44,10 +65,17 @@ public class PropsGenerator : MonoBehaviour
         //spawnJob.Schedule(vertices.Length, 1);
     }
 
-    IEnumerator InitializePoolsRoutine(GameObject[] decorPrefabs)
+    private void ClearPools()
+    {
+        foreach(var pool in _pools)
+        {
+            pool.Dispose();
+        }
+    }
+
+    IEnumerator InitializePoolsRoutine(GameObject[] decorPrefabs, Vector3[] spawnPositions, Plane[] frustumPlanes)
     {
         _pools = new ObjectPool<GameObject>[decorPrefabs.Length];
-        Debug.Log(_pools.Length);
 
         for (int poolIndex = 0; poolIndex < decorPrefabs.Length; poolIndex++)
         {
@@ -55,20 +83,19 @@ public class PropsGenerator : MonoBehaviour
             _pools[poolIndex] = new ObjectPool<GameObject>(
                 () => Instantiate(decorPrefabs[index], spawnParent),
                 decorative => decorative.SetActive(true),
-                decorative => decorative.SetActive(false));
+                decorative => decorative.SetActive(false),
+                decorative => Destroy(decorative));
         }
-        yield return PopulateSpawnPointsRoutine();
+        yield return PopulateSpawnPointsRoutine(spawnPositions, frustumPlanes);
     }
 
-    IEnumerator PopulateSpawnPointsRoutine()
+    IEnumerator PopulateSpawnPointsRoutine(Vector3[] spawnPositions, Plane[] frustumPlanes)
     {
-        foreach (Vector3 position in _spawnablePositions)
+        for (int i = 0; i < spawnPositions.Length; i++)
         {
-            // Instantiate every spawner with a random pool of objects to pull from, so we have variety
-            Instantiate(spawnPointPrefab, position, Quaternion.identity, spawnParent)
-                .GetComponent<SpawnPoint>()
-                .decorativesPool = GetRandomPool();            
+            _spawnPoints[i].SetPositionAndPool(spawnPositions[i], GetRandomPool(), frustumPlanes);
         }
+
         yield return null;
     }
 
@@ -85,7 +112,7 @@ public class PropsGenerator : MonoBehaviour
     #region Spawn Safety
     IEnumerable<Vector3> GetSpawnablePositions(IEnumerable<Vector3> positions)
     {
-        unspawnableAreaSize = _rndg.Next(3);
+        unspawnableAreaSize = 3;
         return positions.Where(position => IsPositionSafeToSpawn(position));
     }
 

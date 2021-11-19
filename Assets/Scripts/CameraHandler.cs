@@ -85,11 +85,11 @@ public class CameraHandler : MonoBehaviour
     /// Sets the output texture for the camera component.
     /// </summary>
     /// <param name="cardRawImage">The RenderTexture element to output the feed of the camera to.</param>
-    public void SetRenderTexture(RenderTexture cardRawImage)
+    public void SetRenderTexture(Texture cardRawImage)
     {
         if (cardRawImage == null) return;
 
-        GetComponent<Camera>().targetTexture = cardRawImage;
+        GetComponent<Camera>().targetTexture = cardRawImage as RenderTexture;
     }
 
     /// <summary>
@@ -102,4 +102,13 @@ public class CameraHandler : MonoBehaviour
 
         GetComponent<Skybox>().material = customSkybox;
     }
+
+    public Plane[] GetFrustumPlanes()
+    {
+        // Calculate the planes from the main camera's view frustum
+        return GeometryUtility.CalculateFrustumPlanes(GetComponent<Camera>());
+    }
+    
+
+
 }

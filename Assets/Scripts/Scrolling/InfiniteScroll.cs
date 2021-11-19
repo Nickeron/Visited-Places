@@ -96,8 +96,6 @@ public class InfiniteScroll : MonoBehaviour, IBeginDragHandler, IDragHandler, IS
         Transform endItem = _scrollRect.content.GetChild(GetEndIndex());
         Vector2 newPos = endItem.position;
 
-        Debug.Log($"End Item {endItem.name}:{endItem.position.y}");
-
         if (_isPositiveScroll)
         {
             newPos.y = endItem.position.y - (_scrollContent.ChildHeight * 0.7f + _scrollContent.ItemSpacing);
@@ -106,7 +104,7 @@ public class InfiniteScroll : MonoBehaviour, IBeginDragHandler, IDragHandler, IS
         {
             newPos.y = endItem.position.y + (_scrollContent.ChildHeight * 0.7f + _scrollContent.ItemSpacing);
         }
-
+        currItem.gameObject.GetComponent<WorldRenderer>().OnListRecycle();
         currItem.position = newPos;
         currItem.SetSiblingIndex(GetEndIndex());
     }
@@ -138,8 +136,6 @@ public class InfiniteScroll : MonoBehaviour, IBeginDragHandler, IDragHandler, IS
     {
         float posYThreshold = transform.position.y + _scrollContent.Height * 0.5f + _outOfBoundsThreshold;
         float negYThreshold = transform.position.y - _scrollContent.Height * 0.5f - _outOfBoundsThreshold;
-
-        Debug.Log($"Positive threshold:{posYThreshold}, and negative:{negYThreshold}, scrollContentChildHeight:{_scrollContent.ChildHeight}");
 
         return _isPositiveScroll ?
             item.position.y - _scrollContent.ChildHeight * 0.25f > posYThreshold :

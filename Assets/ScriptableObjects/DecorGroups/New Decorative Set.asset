@@ -48,8 +48,12 @@ MonoBehaviour:
     - {fileID: 143020, guid: aee731a00031fcc4d9d2b075e528e050, type: 3}
     - {fileID: 160606, guid: 5c3cbac9d5eae3844a928d36e6dbd1a6, type: 3}
     - {fileID: 142018, guid: d537224908c5f444f86c9e57e0c7234c, type: 3}
-    - {fileID: 100000, guid: d2821924b86cff5439f12b0289585dbf, type: 3}
-    - {fileID: 100000, guid: d2821924b86cff5439f12b0289585dbf, type: 3}
-    - {fileID: 100000, guid: d2821924b86cff5439f12b0289585dbf, type: 3}
-  - type: 0
-    objects: []
+    - {fileID: 138344, guid: 8a7cf5ac7b4145441a3dca86f869b09e, type: 3}
+    - {fileID: 117604, guid: 9469bb1d3aa88ca40aa4079e96a27f8e, type: 3}
+    - {fileID: 151190, guid: a9cc5585b9634a9449920c03ec6bc243, type: 3}
+  - type: 1
+    objects:
+    - {fileID: 7405846476849542632, guid: c6308cb7062fac34e8e50600086b12a1, type: 3}
+    - {fileID: 5202732821079448320, guid: cebfacc247a640945a2c30b442202fca, type: 3}
+    - {fileID: 4680757731160225450, guid: 0fde05fa0f3321942a21896ff4f0856f, type: 3}
+    - {fileID: 8783306491908617939, guid: f02116c209ecd9e488fc4d2cd8996133, type: 3}

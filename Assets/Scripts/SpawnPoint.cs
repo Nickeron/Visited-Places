@@ -3,7 +3,7 @@ using UnityEngine.Pool;
 
 public class SpawnPoint : MonoBehaviour
 {
-    public ObjectPool<GameObject> decorativesPool;
+    private ObjectPool<GameObject> decorativesPool;
     private GameObject _decorative;
 
     private void OnTriggerEnter(Collider other)
@@ -27,10 +27,33 @@ public class SpawnPoint : MonoBehaviour
     }
 
     void ReleaseDecorativeObject()
-    {        
-        if(_decorative != null)
+    {
+        if (_decorative != null)
         {
             decorativesPool.Release(_decorative);
-        }        
+        }
+    }
+
+    public void SetPositionAndPool(Vector3 position, ObjectPool<GameObject> newPool, Plane[] frustumPlanes)
+    {
+        transform.localPosition = position;
+        decorativesPool = newPool;
+        Activate();
+
+        if (IsVisible(frustumPlanes)) RequestDecorativeObject();
+    }
+
+    private bool IsVisible(Plane[] frustumPlanes) => GeometryUtility.TestPlanesAABB(frustumPlanes, GetComponent<Collider>().bounds);
+
+    private void Activate()
+    {
+        GetComponent<Collider>().enabled = true;
+    }
+
+    public void ResetProperties()
+    {
+        GetComponent<Collider>().enabled = false;
+
+        if (_decorative != null) Destroy(_decorative);
     }
 }

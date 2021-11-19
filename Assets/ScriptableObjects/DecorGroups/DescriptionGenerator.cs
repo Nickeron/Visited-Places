@@ -6,24 +6,24 @@ public static class DescriptionGenerator
 {
     private static string[] _starters =
         {
-        "That place was $.",
-        "When I visited there it was $.",
-        "I will never forget that place.",
-        "Ahh, yes. A way to describe this place is $.",
-        "Wait till you visit there. When I had been, it was $.",
-        "I sometimes dream of being there. It was $.",
-        "Hmm, $. That's what this place was."
+        "That place was $. ",
+        "When I visited there it was $. ",
+        "I will never forget that place. ",
+        "Ahh, yes. A way to describe this place is $. ",
+        "Wait till you visit there. When I had been, it was $. ",
+        "I sometimes dream of being there. It was a $ place. ",
+        "Hmm, $. That's what this place was. "
     };
 
     private static string[] _middlers =
         {
-        "You could find $ there",
-        "I could see $ around me",
-        "It had $",
-        "There were $ there.",
-        "I saw $",
-        "You could see $",
-        "One can find $"
+        "You could find $ there. ",
+        "I could see $ around me. ",
+        "It had $. ",
+        "There were $ there. ",
+        "I saw $. ",
+        "You could see $. ",
+        "One can find $. "
     };
 
     private static string[] _enders =
@@ -55,8 +55,8 @@ public static class DescriptionGenerator
     private static Dictionary<Population, string[]> _crowdAdjectives = new()
     {
         { Population.Crowded, new string[] { "packed", "full", "brimming", "crammed", "crowded", "overflowing" } },
-        { Population.Normal, new string[] { "normal", "average", "everyday", "like many others", "not too much, not too little", "your standard place" } },
-        { Population.Empty, new string[] { "empty", "like a desert", "vacant", "bare", "desolate", "uninhabited" } },
+        { Population.Normal, new string[] { "normal", "average", "everyday", "usual", "not too much, not too little", "standard" } },
+        { Population.Empty, new string[] { "empty", "deserted", "vacant", "bare", "desolate", "uninhabited" } },
     };
 
     public static Description GetWorldDescription(Random rndg, DecorPiece[] decors, Population density)
@@ -77,12 +77,12 @@ public static class DescriptionGenerator
     {
         var denseAdjectives = _crowdAdjectives[density];
 
-        return ReplaceLastWith(GetRandom(_starters, rndg), "&", GetRandom(denseAdjectives, rndg));
+        return ReplaceLastWith(GetRandom(_starters, rndg), "$", GetRandom(denseAdjectives, rndg));
     }
 
     private static string GetRandomMiddler(DecorPiece[] decors, Random rndg)
     {
-        return ReplaceLastWith(GetRandom(_middlers, rndg), "&", GetDecorDescription(decors.Select(dec => dec.type).ToHashSet()));
+        return ReplaceLastWith(GetRandom(_middlers, rndg), "$", GetDecorDescription(decors.Select(dec => dec.type).ToHashSet()));
     }
 
     private static string GetDecorDescription(HashSet<DecorativeType> decorTypesUsed)
@@ -108,7 +108,7 @@ public static class DescriptionGenerator
         return strings[randomGenerator.Next(strings.Length)];
     }
 
-    private static string ReplaceLastWith(string sentence, string separator = ", ", string replace = "and ")
+    private static string ReplaceLastWith(string sentence, string separator = ", ", string replace = " and ")
     {
         int pos = sentence.LastIndexOf(separator);
         return RemoveLastOf(sentence, separator).Insert(pos, replace);
@@ -117,6 +117,7 @@ public static class DescriptionGenerator
     private static string RemoveLastOf(string sentence, string separator = ", ")
     {
         int pos = sentence.LastIndexOf(separator);
-        return sentence.Remove(pos, separator.Length);
+
+        return pos > -1 ? sentence.Remove(pos, separator.Length): sentence;
     }
 }

@@ -149,7 +149,6 @@ GameObject:
   - component: {fileID: 3956602300276661376}
   - component: {fileID: 3956602300276661438}
   - component: {fileID: 3956602300276661439}
-  - component: {fileID: 3956602300276661437}
   m_Layer: 5
   m_Name: rimg_WorldView
   m_TagString: Untagged
@@ -198,34 +197,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 0}
+  m_Texture: {fileID: 8400000, guid: 5498b7a2c1f6fb14a930e7c416847c0b, type: 2}
   m_UVRect:
     serializedVersion: 2
     x: 0
     y: 0
     width: 1
     height: 1
---- !u!114 &3956602300276661437
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3956602300276661377}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7365fedc4e6bf10409a86a20fe58d62e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Title: {fileID: 752710777068757687}
-  Body: {fileID: 6113385627223231843}
 --- !u!1 &3956602300903337964
 GameObject:
   m_ObjectHideFlags: 0
@@ -237,6 +222,7 @@ GameObject:
   - component: {fileID: 3956602300903337963}
   - component: {fileID: 3956602300903337961}
   - component: {fileID: 3956602300903337962}
+  - component: {fileID: 244178624993676920}
   m_Layer: 5
   m_Name: WorldCard
   m_TagString: Untagged
@@ -305,6 +291,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &244178624993676920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3956602300903337964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7365fedc4e6bf10409a86a20fe58d62e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Title: {fileID: 752710777068757687}
+  Body: {fileID: 6113385627223231843}
+  rawImage: {fileID: 3956602300276661439}
 --- !u!1 &4782924327758066662
 GameObject:
   m_ObjectHideFlags: 0

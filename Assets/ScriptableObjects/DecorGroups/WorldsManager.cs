@@ -21,6 +21,8 @@ public class WorldsManager : MonoBehaviour
     [SerializeField]
     Material[] skyboxes;
 
+    float index = 0;
+
     private void OnEnable()
     {
         WorldRenderer.onDemandNewWorld += InstantiateWorld;
@@ -33,30 +35,38 @@ public class WorldsManager : MonoBehaviour
         WorldRenderer.onRedecorateWorld -= RedecorateWorld;
     } 
 
-    public GameObject InstantiateWorld()
+    public GameObject InstantiateWorld(Texture rawImageFeed)
     {
-        GameObject newWorld = Instantiate(WorldGeneratorPrefab);
-        
+        GameObject newWorld = Instantiate(WorldGeneratorPrefab, new Vector3(0, index), Quaternion.identity);
+        index += 20;
+        newWorld.GetComponent<PlaceGenerator>().ConnectBroadCast(rawImageFeed);
         return newWorld;
     }
 
     public Description RedecorateWorld(GameObject world, int seed)
     {
+        //Debug.Log($"Seed {seed}");
         if (world == null) throw new NullReferenceException();
 
         System.Random rand = new(seed);
 
-        DecorPiece[] newDecorSet = decorationSets[seed].GetRandomDecors(5, rand);
-        Population density = (Population)rand.Next(2);
+        DecorPiece[] newDecorSet = decorationSets[rand.Next(decorationSets.Length)].GetRandomDecors(5, rand);
+        Population density = GetRandomPopulation(rand);
 
         world.GetComponent<PlaceGenerator>()
             .GenerateNew(seed,
-            meshDataSOs[rand.Next(meshDataSOs.Length)],
-            GetDecorPrefabs(newDecorSet),
-            density,
-            skyboxes[rand.Next(skyboxes.Length)]);
+                meshDataSOs[rand.Next(meshDataSOs.Length)],
+                GetDecorPrefabs(newDecorSet),
+                density,
+                skyboxes[rand.Next(skyboxes.Length)]);
 
         return DescriptionGenerator.GetWorldDescription(rand, newDecorSet, density);
+    }
+
+    private Population GetRandomPopulation(System.Random rand)
+    {
+        Array values = Enum.GetValues(typeof(Population));
+        return (Population) values.GetValue(rand.Next(values.Length));
     }
 
     GameObject[] GetDecorPrefabs(DecorPiece[] decorSet)
