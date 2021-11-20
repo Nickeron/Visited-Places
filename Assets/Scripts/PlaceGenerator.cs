@@ -6,7 +6,7 @@ public class PlaceGenerator : MonoBehaviour
     [SerializeField]
     CameraHandler cameraHandler;
 
-    System.Action<int, MeshDataSO, System.Action<Vector3[]>> CreateMesh;
+    System.Action<int, MeshDataSO, Gradient, System.Action<Vector3[]>> CreateMesh;
     System.Action<int, Vector3[], GameObject[], Plane[], Population> PopulatePlace;
 
 
@@ -21,9 +21,9 @@ public class PlaceGenerator : MonoBehaviour
         cameraHandler.SetRenderTexture(cardRawImage);
     }
 
-    public void GenerateNew(int seed, MeshDataSO meshParameters, GameObject[] decorPrefabs, Population density, Material skybox)
+    public void GenerateNew(int seed, MeshDataSO meshParameters, Gradient meshColor, GameObject[] decorPrefabs, Population density, Material skybox)
     {
-        CreateMesh(seed, meshParameters, meshVertices => PopulatePlace(seed, meshVertices, decorPrefabs, cameraHandler.GetFrustumPlanes(), density));
+        CreateMesh(seed, meshParameters, meshColor, meshVertices => PopulatePlace(seed, meshVertices, decorPrefabs, cameraHandler.GetFrustumPlanes(), density));
 
         cameraHandler.SetCameraSky(skybox);       
     }

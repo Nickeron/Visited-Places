@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 
 using UnityEngine;
 
@@ -18,7 +18,7 @@ public class MeshGenerator : MonoBehaviour
 
     private System.Random _rndg;
 
-    public void ConstructMesh(int seed, MeshDataSO meshParameters, System.Action<Vector3[]> onMeshConstructed)
+    public void ConstructMesh(int seed, MeshDataSO meshParameters, Gradient worldColor, System.Action<Vector3[]> onMeshConstructed)
     {
         StopAllCoroutines();
 
@@ -29,14 +29,14 @@ public class MeshGenerator : MonoBehaviour
         _rndg = new System.Random(seed);
 
         // Create the world
-        StartCoroutine(CreateShape(onMeshConstructed));
+        StartCoroutine(CreateShape(worldColor, onMeshConstructed));
     }
 
-    IEnumerator CreateShape(System.Action<Vector3[]> onFinish)
+    IEnumerator CreateShape(Gradient worldColor, System.Action<Vector3[]> onFinish)
     {
         CreateVertices();
         CreateTriangles();
-        CreateColors();
+        CreateColors(worldColor);
 
         yield return UpdateMesh(onFinish);
     }
@@ -94,13 +94,13 @@ public class MeshGenerator : MonoBehaviour
         });
     }
 
-    private void CreateColors()
+    private void CreateColors(Gradient worldColor)
     {
         _colors = new Color[_vertices.Length];
 
         ForEachVertex((x, z, index) =>
         {
-            _colors[index] = _meshData.worldColor.Evaluate(GetNormalHeight(index));
+            _colors[index] = worldColor.Evaluate(GetNormalHeight(index));
         });
     }
     #endregion Creation Methods

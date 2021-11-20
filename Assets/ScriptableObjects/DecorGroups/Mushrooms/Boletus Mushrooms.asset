@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d406ce3ad5895ee40817c433954c685f, type: 3}
+  m_Name: Boletus Mushrooms
+  m_EditorClassIdentifier: 
+  type: boletus mushrooms
+  props:
+  - {fileID: 100000, guid: f434e2ba20a1b744db363ce30134bf3a, type: 3}
+  - {fileID: 100000, guid: 75eb2c140851eee49a9a9a02073a1871, type: 3}
+  - {fileID: 100000, guid: af6775dc8840649419be56a2fdcb7092, type: 3}
+  - {fileID: 100000, guid: 3d4addb4848f47848aba7ced142ecf34, type: 3}
+  - {fileID: 100000, guid: d16836d3d83da9146869693501214641, type: 3}
+  - {fileID: 100000, guid: d3c43d9d3a519464487933ce445bb5f4, type: 3}
+  - {fileID: 100000, guid: d2f09b435a9b6ed4aa07bb2b9dff7400, type: 3}
+  - {fileID: 5440707293445505367, guid: 494f6d43e170e9145bc7865d243ee00b, type: 3}

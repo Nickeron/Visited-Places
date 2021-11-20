@@ -78,7 +78,7 @@ public class CameraHandler : MonoBehaviour
     /// </summary>
     void RotateGameObject()
     {
-        transform.Rotate(new Vector3(0, rotationSpeed * Time.deltaTime, 0));
+        transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime, Space.World);
     }
 
     /// <summary>
@@ -103,12 +103,12 @@ public class CameraHandler : MonoBehaviour
         GetComponent<Skybox>().material = customSkybox;
     }
 
+    /// <summary>
+    /// Calculates the camera's view frustum and returns the limits of the viewing frame  
+    /// </summary>
+    /// <returns>an array of Plane</returns>
     public Plane[] GetFrustumPlanes()
     {
-        // Calculate the planes from the main camera's view frustum
         return GeometryUtility.CalculateFrustumPlanes(GetComponent<Camera>());
     }
-    
-
-
 }

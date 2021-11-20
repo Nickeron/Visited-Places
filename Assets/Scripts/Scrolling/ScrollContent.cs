@@ -101,17 +101,26 @@ public class ScrollContent : MonoBehaviour
         // Subtract the margin from the top and bottom.
         height = rectTransform.rect.height - (2 * verticalMargin);
 
-        childWidth = rtChildren[0].rect.width;
         childHeight = rtChildren[0].rect.height;        
 
         float originY = 0 - (height * 0.5f);
         float posOffset = childHeight * 0.5f;
+
         for (int i = 0; i < rtChildren.Length; i++)
         {
             Vector2 childPos = rtChildren[i].localPosition;
             childPos.y = originY + posOffset + i * (childHeight + itemSpacing);
             rtChildren[i].localPosition = childPos;
-            rtChildren[i].GetComponent<WorldRenderer>().OnListRecycle();
+
+            ActivateRenderer(rtChildren[i].gameObject);
         }
+    }
+
+    /// <summary>
+    /// Activates the world renderer component
+    /// </summary>
+    private void ActivateRenderer(GameObject renderer)
+    {
+        renderer.GetComponent<WorldRenderer>().OnListRecycle();
     }
 }

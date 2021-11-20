@@ -23,9 +23,4 @@ public class MeshDataSO : ScriptableObject
     [Header("Random Generator Seed")]
     [Tooltip("A number given to the random generator")]
     public int seed = 5;
-
-    [Header("World Color")]
-
-    [Tooltip("Set the gradient to use for painting this world")]
-    public Gradient worldColor;
 }

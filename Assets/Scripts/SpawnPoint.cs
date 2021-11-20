@@ -36,7 +36,7 @@ public class SpawnPoint : MonoBehaviour
 
     public void SetPositionAndPool(Vector3 position, ObjectPool<GameObject> newPool, Plane[] frustumPlanes)
     {
-        transform.localPosition = position;
+        transform.localPosition = position + Vector3.down * 0.1f;
         decorativesPool = newPool;
         Activate();
 

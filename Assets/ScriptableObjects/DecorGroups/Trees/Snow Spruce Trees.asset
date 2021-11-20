@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d406ce3ad5895ee40817c433954c685f, type: 3}
+  m_Name: Snow Spruce Trees
+  m_EditorClassIdentifier: 
+  type: spruce trees
+  props:
+  - {fileID: 7443795410256898406, guid: caba7095de46ba0448856bd13c42bf2c, type: 3}
+  - {fileID: 2869813988512773676, guid: 07c7f21647fbf4d44901cec48ed2d755, type: 3}
+  - {fileID: 4897461508400794980, guid: 46729ad9f0dabdc408636c3637d5e8f4, type: 3}
+  - {fileID: 7479857684958793984, guid: bd75119ad677793459f5fd08d9f6b1ba, type: 3}
+  - {fileID: 5453721781518326334, guid: d20ced4b9eaf55b40a8c8592492dc40c, type: 3}
+  - {fileID: 4825623445985771256, guid: 16800cf067d8ff54a93a3892be5da99b, type: 3}
+  - {fileID: 7917582350738867910, guid: 611638ec25b38b640830edb5f14133f1, type: 3}
+  - {fileID: 8230549646072938925, guid: e82104fe08faf0d46b1289db65085dbc, type: 3}
+  - {fileID: 3809996514811788388, guid: f8a2b7c447d6d2845a9771bb71a0eec7, type: 3}
+  - {fileID: 8567473264819760671, guid: b7897f85f8ed6084eb5fb196a37114c0, type: 3}
+  - {fileID: 2590313574606009477, guid: d18aa0dd826bc8048a5b394fa3113892, type: 3}

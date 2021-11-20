@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d406ce3ad5895ee40817c433954c685f, type: 3}
+  m_Name: Bushes Dark
+  m_EditorClassIdentifier: 
+  type: dark bushes
+  props:
+  - {fileID: 100000, guid: 16c947c90975bad4c93e670f0e8c1833, type: 3}
+  - {fileID: 100000, guid: 68194ab0d03c41f4c9e643c866737d21, type: 3}
+  - {fileID: 100000, guid: 21801ed3faf38e9408ef37649d2af1cf, type: 3}
+  - {fileID: 100000, guid: b53925e5b6f68714e8d5918fdd3d1b3f, type: 3}
+  - {fileID: 100000, guid: 07c793a24c17b9342a627fc79faad0fa, type: 3}
+  - {fileID: 100000, guid: 2fb7f5443268bf84591d194378a5a0ff, type: 3}

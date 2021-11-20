@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d406ce3ad5895ee40817c433954c685f, type: 3}
+  m_Name: Fall Maple Trees 1
+  m_EditorClassIdentifier: 
+  type: maple trees
+  props:
+  - {fileID: 5310630981960610687, guid: 202e46692fd46c34a8070289485947ea, type: 3}
+  - {fileID: 6887607317992789726, guid: 2ad8e8ce075c26e4bb1fa3ec6659259e, type: 3}
+  - {fileID: 5155420434927990432, guid: 60c3dfc5577dd62418a5008d7d4a75f7, type: 3}
+  - {fileID: 5420066567025644894, guid: 0471debc4ca94604fbc1a51018c4e0db, type: 3}
+  - {fileID: 941728082031459695, guid: 516223f53f3962145855c880aaf01d88, type: 3}
+  - {fileID: 3406966521266889346, guid: 53ba878a846d37348a173133ac525910, type: 3}
+  - {fileID: 6930474551379129693, guid: bc388bebf27082145a52ae4f106fc5b9, type: 3}
+  - {fileID: 7384177643383238487, guid: c257d6ef04814b44884d3f9564f15a1c, type: 3}
+  - {fileID: 4060651497246010951, guid: 37a49cc18aafe1740983abd914449711, type: 3}
+  - {fileID: 7453864061532409123, guid: a74109ba57c5da24a93000d2827e41ee, type: 3}
+  - {fileID: 566775872959078696, guid: 0c5228b550462c94fb7770d04a6a8c33, type: 3}

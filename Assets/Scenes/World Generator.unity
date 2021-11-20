@@ -367,6 +367,7 @@ MonoBehaviour:
   WorldGeneratorPrefab: {fileID: 2673887379879299833, guid: 217ba53cc5bb3694b89852a23f89c12e, type: 3}
   decorationSets:
   - {fileID: 11400000, guid: 07c2ab87964042249adfebda7c9b9c0e, type: 2}
+  - {fileID: 11400000, guid: 1dd4786f86bd3624f916190cd8373591, type: 2}
   meshDataSOs:
   - {fileID: 11400000, guid: 321bd754812520948b6cd64d9cf9e184, type: 2}
   - {fileID: 11400000, guid: c36a82be75c51b84eaef98e2f2446707, type: 2}
@@ -378,7 +379,6 @@ MonoBehaviour:
   - {fileID: 2100000, guid: b4f152e0498484391a9f0d5a1facf03b, type: 2}
   - {fileID: 2100000, guid: 7416536dbe0334cfd888dd1beb75a9fb, type: 2}
   - {fileID: 2100000, guid: 8b7dd0809c7c6498789fa32a61eaa6cb, type: 2}
-  - {fileID: 2100000, guid: c494c335823f54b52b2e87e1b7a63a23, type: 2}
   - {fileID: 2100000, guid: 0ffaa0b7117ba8c47a9d05ae701d4b4d, type: 2}
 --- !u!4 &673587719
 Transform:
@@ -471,7 +471,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 25
+  m_AdditionalShaderChannelsFlag: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -1282,7 +1282,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
