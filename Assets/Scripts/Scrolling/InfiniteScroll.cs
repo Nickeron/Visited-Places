@@ -5,6 +5,11 @@ using UnityEngine.UI;
 public class InfiniteScroll : MonoBehaviour, IBeginDragHandler, IDragHandler, IScrollHandler
 {
     #region Private Members
+    /// <summary>
+    /// The ScrollContent component that belongs to the scroll content GameObject.
+    /// </summary>
+    [SerializeField]
+    private float _screenHeightReference = 1080;
 
     /// <summary>
     /// The ScrollContent component that belongs to the scroll content GameObject.
@@ -96,18 +101,25 @@ public class InfiniteScroll : MonoBehaviour, IBeginDragHandler, IDragHandler, IS
         Transform endItem = _scrollRect.content.GetChild(GetEndIndex());
         Vector2 newPos = endItem.position;
 
+        Debug.Log($"Item Distance:{ItemDistance()}");
         if (_isPositiveScroll)
         {
-            newPos.y = endItem.position.y - (_scrollContent.ChildHeight * 0.7f + _scrollContent.ItemSpacing);
+            newPos.y = endItem.position.y - ItemDistance();
         }
         else
         {
-            newPos.y = endItem.position.y + (_scrollContent.ChildHeight * 0.7f + _scrollContent.ItemSpacing);
+            newPos.y = endItem.position.y + ItemDistance();
         }
         currItem.gameObject.GetComponent<WorldRenderer>().OnListRecycle();
         currItem.position = newPos;
         currItem.SetSiblingIndex(GetEndIndex());
     }
+
+    private float ItemDistance() => RelativeHeight(_scrollContent.ChildHeight) + RelativeHeight(_scrollContent.ItemSpacing);
+
+    private float ClipThreshold() => (RelativeHeight(_scrollContent.Height) + RelativeHeight(_scrollContent.ChildHeight)) * 0.5f + RelativeHeight(_outOfBoundsThreshold);
+
+    private float RelativeHeight(float itemHeight) => itemHeight * Screen.height /_screenHeightReference;    
 
     /// <summary>
     /// Get the index of the End Item.
@@ -134,11 +146,11 @@ public class InfiniteScroll : MonoBehaviour, IBeginDragHandler, IDragHandler, IS
     /// <returns>True if the item has reached the threshold for either ends of the scroll view, false otherwise.</returns>
     private bool ReachedThreshold(Transform item)
     {
-        float posYThreshold = transform.position.y + _scrollContent.Height * 0.5f + _outOfBoundsThreshold;
-        float negYThreshold = transform.position.y - _scrollContent.Height * 0.5f - _outOfBoundsThreshold;
+        float posYThreshold = transform.position.y + ClipThreshold();
+        float negYThreshold = transform.position.y - ClipThreshold();
 
         return _isPositiveScroll ?
-            item.position.y - _scrollContent.ChildHeight * 0.25f > posYThreshold :
-            item.position.y + _scrollContent.ChildHeight * 0.25f < negYThreshold;
+            item.position.y > posYThreshold :
+            item.position.y < negYThreshold;
     }
 }
