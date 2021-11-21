@@ -71,14 +71,14 @@ public class PlacesManager : MonoBehaviour
     #region Event Subscription
     private void OnEnable()
     {
-        PlaceRenderer.onDemandNewWorld += CreateNewPlace;
-        PlaceRenderer.onRedecorateWorld += RedecoratePlace;
+        PlaceRenderer.onDemandNewPlace += CreateNewPlace;
+        PlaceRenderer.onRedecoratePlace += RedecoratePlace;
     }
 
     private void OnDisable()
     {
-        PlaceRenderer.onDemandNewWorld -= CreateNewPlace;
-        PlaceRenderer.onRedecorateWorld -= RedecoratePlace;
+        PlaceRenderer.onDemandNewPlace -= CreateNewPlace;
+        PlaceRenderer.onRedecoratePlace -= RedecoratePlace;
     }
     #endregion Event Subscription
 

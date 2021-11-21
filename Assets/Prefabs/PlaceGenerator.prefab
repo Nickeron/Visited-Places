@@ -296,6 +296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bf674ee6b7fdb04ba4d16189f82a151, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unspawnableAreaSize: 2
   spawnPointPrefab: {fileID: 588148790822019422, guid: 2f5b3716c1efd2d4f9346fab4b58530a, type: 3}
   spawnParent: {fileID: 5499000568432784462}
 --- !u!1 &6941569094714572544

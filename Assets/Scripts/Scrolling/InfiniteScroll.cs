@@ -106,7 +106,7 @@ public class InfiniteScroll : MonoBehaviour, IBeginDragHandler, IDragHandler, IS
         {
             newPos.y = endItem.position.y + ItemDistance();
         }
-        currItem.gameObject.GetComponent<PlaceRenderer>().OnListRecycle();
+        currItem.gameObject.GetComponent<PlaceRenderer>().OnReorder();
         currItem.position = newPos;
         currItem.SetSiblingIndex(GetEndIndex());
     }

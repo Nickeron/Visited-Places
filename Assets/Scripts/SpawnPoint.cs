@@ -3,12 +3,11 @@ using UnityEngine.Pool;
 
 public class SpawnPoint : MonoBehaviour
 {
-    private ObjectPool<GameObject> decorativesPool;
+    private ObjectPool<GameObject> _decorativesPool;
     private GameObject _decorative;
 
     private void OnTriggerEnter(Collider other)
     {
-        //Debug.Log("Trigger");
         if (other == null) return;
 
         if (other.gameObject.CompareTag("SpawnActivation"))
@@ -22,7 +21,7 @@ public class SpawnPoint : MonoBehaviour
 
     void RequestDecorativeObject()
     {
-        _decorative = decorativesPool.Get();
+        _decorative = _decorativesPool.Get();
         _decorative.transform.position = transform.position;
     }
 
@@ -30,14 +29,14 @@ public class SpawnPoint : MonoBehaviour
     {
         if (_decorative != null)
         {
-            decorativesPool.Release(_decorative);
+            _decorativesPool.Release(_decorative);
         }
     }
 
     public void SetPositionAndPool(Vector3 position, ObjectPool<GameObject> newPool, Plane[] frustumPlanes)
     {
         transform.localPosition = position + Vector3.down * 0.1f;
-        decorativesPool = newPool;
+        _decorativesPool = newPool;
         Activate();
 
         if (IsVisible(frustumPlanes)) RequestDecorativeObject();
