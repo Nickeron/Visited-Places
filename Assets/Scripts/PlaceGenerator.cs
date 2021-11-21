@@ -23,7 +23,8 @@ public class PlaceGenerator : MonoBehaviour
 
     public void GenerateNew(int seed, MeshDataSO meshParameters, Gradient meshColor, GameObject[] decorPrefabs, Population density, Material skybox)
     {
-        CreateMesh(seed, meshParameters, meshColor, meshVertices => PopulatePlace(seed, meshVertices, decorPrefabs, cameraHandler.GetFrustumPlanes(), density));
+        CreateMesh(seed, meshParameters, meshColor, 
+            meshVertices => PopulatePlace(seed, meshVertices, decorPrefabs, cameraHandler.GetFrustumPlanes(), density));
 
         cameraHandler.SetCameraSky(skybox);       
     }

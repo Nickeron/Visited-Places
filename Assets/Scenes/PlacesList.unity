@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.2846214, g: 0.37120992, b: 0.498806, a: 1}
+  m_IndirectSpecularColor: {r: 0.20749143, g: 0.21147497, b: 0.14576834, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -365,23 +365,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d13c5810ff1f5c4db7e8a31676b3e92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WorldGeneratorPrefab: {fileID: 2673887379879299833, guid: 217ba53cc5bb3694b89852a23f89c12e, type: 3}
+  PlaceGeneratorPrefab: {fileID: 2673887379879299833, guid: 217ba53cc5bb3694b89852a23f89c12e, type: 3}
   decorationSets:
   - {fileID: 11400000, guid: 07c2ab87964042249adfebda7c9b9c0e, type: 2}
   - {fileID: 11400000, guid: 1dd4786f86bd3624f916190cd8373591, type: 2}
   - {fileID: 11400000, guid: 59cc6783ea467f644b6e3fa62019460f, type: 2}
   - {fileID: 11400000, guid: 8107fde490e288144b25ab15efd9d16e, type: 2}
   - {fileID: 11400000, guid: 8ae64d105d3414545bf1c98b56e06dc7, type: 2}
+  - {fileID: 11400000, guid: 51458d6481719c24ea5ad506d75482c7, type: 2}
+  - {fileID: 11400000, guid: 112e5a4676327ee43bed8561e0a5b62e, type: 2}
   meshDataSOs:
   - {fileID: 11400000, guid: 321bd754812520948b6cd64d9cf9e184, type: 2}
   - {fileID: 11400000, guid: c36a82be75c51b84eaef98e2f2446707, type: 2}
   - {fileID: 11400000, guid: 724baba89e25d544a8ac08e94a69ba21, type: 2}
   skyboxes:
-  - {fileID: 2100000, guid: aa78c8d403a8547fe86d1f74239e6b03, type: 2}
-  - {fileID: 2100000, guid: 2d796ced94d61438fbab81b194038162, type: 2}
-  - {fileID: 2100000, guid: c56e28e54cac24b04ae3dd957d214534, type: 2}
-  - {fileID: 2100000, guid: 7416536dbe0334cfd888dd1beb75a9fb, type: 2}
-  - {fileID: 2100000, guid: 8b7dd0809c7c6498789fa32a61eaa6cb, type: 2}
+  - {fileID: 2100000, guid: 54fe2f000ad8f424fb63cc3ea0ae2bb2, type: 2}
+  - {fileID: 2100000, guid: 3a6db933fef1d4c759bf21220420505f, type: 2}
+  - {fileID: 2100000, guid: 01f4eb1c73693428d923f1520032e7f9, type: 2}
+  - {fileID: 2100000, guid: 73324b55f67f54c7bbf43204788b8bbe, type: 2}
+  - {fileID: 2100000, guid: cdbb40e11399e4a17882ada20a1b896a, type: 2}
+  - {fileID: 2100000, guid: fe4e130f9947345a2b213cb5038851a2, type: 2}
   - {fileID: 2100000, guid: 0ffaa0b7117ba8c47a9d05ae701d4b4d, type: 2}
 --- !u!4 &673587719
 Transform:
@@ -451,7 +454,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 1
+  m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -906,14 +909,14 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -941,12 +944,12 @@ Light:
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
-  m_RenderMode: 0
+  m_RenderMode: 2
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1

@@ -84,10 +84,7 @@ public class InfiniteScroll : MonoBehaviour, IBeginDragHandler, IDragHandler, IS
         // Get the current item 
         Transform currItem = _scrollRect.content.GetChild(GetCurrentIndex());
 
-        if (!ReachedThreshold(currItem))
-        {
-            return;
-        }
+        if (!ReachedThreshold(currItem)) return;
 
         SwitchItems(currItem);
     }
@@ -101,7 +98,6 @@ public class InfiniteScroll : MonoBehaviour, IBeginDragHandler, IDragHandler, IS
         Transform endItem = _scrollRect.content.GetChild(GetEndIndex());
         Vector2 newPos = endItem.position;
 
-        Debug.Log($"Item Distance:{ItemDistance()}");
         if (_isPositiveScroll)
         {
             newPos.y = endItem.position.y - ItemDistance();
@@ -110,15 +106,28 @@ public class InfiniteScroll : MonoBehaviour, IBeginDragHandler, IDragHandler, IS
         {
             newPos.y = endItem.position.y + ItemDistance();
         }
-        currItem.gameObject.GetComponent<WorldRenderer>().OnListRecycle();
+        currItem.gameObject.GetComponent<PlaceRenderer>().OnListRecycle();
         currItem.position = newPos;
         currItem.SetSiblingIndex(GetEndIndex());
     }
 
+    /// <summary>
+    /// Calculates the distance for the position of the next item, on the list.
+    /// </summary>
+    /// <returns>float Distance</returns>
     private float ItemDistance() => RelativeHeight(_scrollContent.ChildHeight) + RelativeHeight(_scrollContent.ItemSpacing);
 
+    /// <summary>
+    /// Calculates the threshold height for reordering a list item.
+    /// </summary>
+    /// <returns>float Threshold Height</returns>
     private float ClipThreshold() => (RelativeHeight(_scrollContent.Height) + RelativeHeight(_scrollContent.ChildHeight)) * 0.5f + RelativeHeight(_outOfBoundsThreshold);
 
+    /// <summary>
+    /// Calculates the relative height of an item based on Screen's height.
+    /// </summary>
+    /// <param name="itemHeight"></param>
+    /// <returns>float RelativeHeight</returns>
     private float RelativeHeight(float itemHeight) => itemHeight * Screen.height /_screenHeightReference;    
 
     /// <summary>

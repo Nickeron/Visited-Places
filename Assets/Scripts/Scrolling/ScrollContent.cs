@@ -121,6 +121,6 @@ public class ScrollContent : MonoBehaviour
     /// </summary>
     private void ActivateRenderer(GameObject renderer)
     {
-        renderer.GetComponent<WorldRenderer>().OnListRecycle();
+        renderer.GetComponent<PlaceRenderer>().OnListRecycle();
     }
 }

@@ -19,8 +19,4 @@ public class MeshDataSO : ScriptableObject
     [Header("Increase in frequency of octaves")]
     [Tooltip("Increases the number of small features")]
     public float lacunarity = 3;
-
-    [Header("Random Generator Seed")]
-    [Tooltip("A number given to the random generator")]
-    public int seed = 5;
 }

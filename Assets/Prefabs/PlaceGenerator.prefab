@@ -186,7 +186,7 @@ GameObject:
   - component: {fileID: 2673887379879299781}
   - component: {fileID: 2673887379879299778}
   m_Layer: 0
-  m_Name: RandomWorld
+  m_Name: PlaceGenerator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

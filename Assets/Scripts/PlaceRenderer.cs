@@ -2,7 +2,7 @@ using UnityEngine;
 
 using Text = TMPro.TextMeshProUGUI;
 
-public class WorldRenderer : MonoBehaviour
+public class PlaceRenderer : MonoBehaviour
 {
     [SerializeField]
     Text Title, Body;

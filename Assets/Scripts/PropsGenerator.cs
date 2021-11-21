@@ -7,12 +7,6 @@ using UnityEngine.Pool;
 
 public class PropsGenerator : MonoBehaviour
 {
-    //[Tooltip("How crowded do we want the planet to be?")]
-    //public Population population = Population.Normal;
-
-    //[Tooltip("All the types of decorative objects, this world will use")]
-    //public GameObject[] prefabs;
-
     // Size of the mesh's area, where the generator won't spawn objects, to avoid blocking the camera's view
     int unspawnableAreaSize = 1;
 
@@ -132,7 +126,7 @@ public class PropsGenerator : MonoBehaviour
 
 public enum Population
 {
-    Empty = 50,
-    Normal = 100,
-    Crowded = 200,
+    Empty = 75,
+    Normal = 150,
+    Crowded = 300,
 }
