@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// Generates description for a place given its parameters.
+/// </summary>
 public static class DescriptionGenerator
 {
     #region Strings

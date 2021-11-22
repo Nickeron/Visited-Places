@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Generates a place and connects its camera output to the UI
+/// </summary>
 [RequireComponent(typeof(MeshGenerator), typeof(PropsGenerator))]
 public class PlaceGenerator : MonoBehaviour
 {
