@@ -36,3 +36,6 @@ sysinfo.txt
 *.apk
 *.unitypackage
 *.log
+Release/Visited Places_BurstDebugInformation_DoNotShip/
+Release/Visited Places_BackUpThisFolder_ButDontShipItWithYourGame/
+Release/Visited Places_Data/
