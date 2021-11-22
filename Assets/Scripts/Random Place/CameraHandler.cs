@@ -85,11 +85,11 @@ public class CameraHandler : MonoBehaviour
     /// Sets the output texture for the camera component.
     /// </summary>
     /// <param name="cardRawImage">The RenderTexture element to output the feed of the camera to.</param>
-    public void SetRenderTexture(Texture cardRawImage)
+    public void SetRenderTexture(RenderTexture cardRawImage)
     {
         if (cardRawImage == null) return;
 
-        GetComponent<Camera>().targetTexture = cardRawImage as RenderTexture;
+        GetComponent<Camera>().targetTexture = cardRawImage;
     }
 
     /// <summary>

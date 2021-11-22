@@ -2,7 +2,7 @@
 using UnityEngine;
 
 /// <summary>
-/// Manages the creation and redecoration of all the place.
+/// Manages the creation and redecoration of all the places.
 /// </summary>
 public class PlacesManager : MonoBehaviour
 {
@@ -32,7 +32,7 @@ public class PlacesManager : MonoBehaviour
     /// </summary>
     /// <param name="rawImageFeed">RenderTexture to be used by the newly created place's camera to broadcast there.</param>
     /// <returns>The newly instantiated place as a GameObject.</returns>
-    public GameObject CreateNewPlace(Texture rawImageFeed)
+    public GameObject CreateNewPlace(RenderTexture rawImageFeed)
     {
         GameObject newWorld = Instantiate(PlaceGeneratorPrefab, new Vector3(0, _placeHeightPos), Quaternion.identity);
         _placeHeightPos += 20;
@@ -56,16 +56,17 @@ public class PlacesManager : MonoBehaviour
         DecorativeSet newDecorSet = GetDecorset();
         Decors decorPieces = newDecorSet.GetRandomDecors(_randomGenerator);
         Population density = GetPopulation();
+        MeshDataSO newMeshParams = GetMesh();
 
         place.GetComponent<PlaceGenerator>().GenerateNew(
                 seed,
-                GetMesh(),
+                newMeshParams,
                 newDecorSet.worldColor,
                 decorPieces.GetPrefabs(),
                 density,
                 GetSkybox());
 
-        return DescriptionGenerator.GetWorldDescription(_randomGenerator, decorPieces.GetTypes(), density);
+        return DescriptionGenerator.GetPlaceDescription(_randomGenerator, decorPieces.GetTypes(), density, newMeshParams.descriptiveName);
     }
 
     #region Event Subscription

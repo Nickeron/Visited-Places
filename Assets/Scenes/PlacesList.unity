@@ -347,7 +347,7 @@ GameObject:
   - component: {fileID: 673587719}
   - component: {fileID: 673587718}
   m_Layer: 0
-  m_Name: Worlds Manager
+  m_Name: Places Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

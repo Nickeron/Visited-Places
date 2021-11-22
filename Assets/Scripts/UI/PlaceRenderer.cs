@@ -13,7 +13,7 @@ public class PlaceRenderer : MonoBehaviour
     GameObject connectedPlace;
 
     public static System.Func<GameObject, int, Description> onRedecoratePlace;
-    public static System.Func<Texture, GameObject> onDemandNewPlace;
+    public static System.Func<RenderTexture, GameObject> onDemandNewPlace;
 
     /// <summary>
     /// Called when the current PostCard item has reached the threshold and needs to be reordered in the list
@@ -22,12 +22,12 @@ public class PlaceRenderer : MonoBehaviour
     /// Then it keeps the passed GameObject-Place in connectedPlace to redecorate it on the next reorder.
     /// Then asks for a description of the redecoration from its observer, and sets the text of the title and the body of the description on the UI.
     /// </summary>
-    /// <exception cref="System.NullReferenceException"></exception>
+    /// <exception cref="System.NullReferenceException">When the observer provides null instead of a place GameObject.</exception>
     public void OnReorder() 
     {
         if (connectedPlace == null) 
         {
-            connectedPlace = onDemandNewPlace?.Invoke(rawImage.texture);
+            connectedPlace = onDemandNewPlace?.Invoke(rawImage.texture as RenderTexture);
             if (connectedPlace == null) throw new System.NullReferenceException("Asked for new place from subscriber, but got null.");
         }
 

@@ -4,6 +4,8 @@ using UnityEngine;
 public class MeshDataSO : ScriptableObject
 {
     [Header("Noise Distribution")]
+    [Tooltip("A descriptive name")]
+    public string descriptiveName;
 
     [Tooltip("How zoomed in the noise is")]
     public float noiseScale = 10;
