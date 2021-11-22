@@ -1,9 +1,8 @@
-# Visited Places
-Project of random worlds
+![screenshot of the app](https://github.com/Nickeron/Visited-Places/blob/main/Release/Screenshot.png?raw=true)
+
+A project of randomly generated worlds
 
 In this project we show a list of randomly generated worlds live-rendered along with their description.
-
-![screenshot of the app](https://github.com/Nickeron/Visited-Places/blob/main/Release/Screenshot.png?raw=true)
 
 A total of three (3) elements in the list are recycled for emulating the effect of an endlessly scrollable list.
 Each element is connected with a lively-rendered mesh. Each element's renderTexture is set on the output of the camera of each place.
