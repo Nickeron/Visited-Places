@@ -2,7 +2,7 @@
 
 A project of randomly generated worlds
 
-In this project we show a list of randomly generated worlds live-rendered along with their description.
+In this project we demonstrate an infinitely scrollable list of randomly generated, live-rendered places, along with their description.
 
 A total of three (3) elements in the list are recycled for emulating the effect of an endlessly scrollable list.
 Each element is connected with a lively-rendered mesh. Each element's renderTexture is set on the output of the camera of each place.
